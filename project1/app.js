@@ -1,102 +1,41 @@
-const express = require('express');
-const app = express();
-const port = 3000;
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
 
-const data = [11, 22, 33, 44];
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-})
+var app = express();
 
-app.get('/data', (req, res) => {
-    res.status(200).json(data);
-})
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
-app.get('/data/:id', (req, res) => {
-    const id = req.params.id;
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-    if (id >= 0 && id < data.length) {
-        res.json(data[id]);
-    } else {
-        res.status(400).json({ 
-            "err": "id out of range" 
-        });
-    }
-})
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 
-app.post('/data', (req, res) => {
-    const new_data = req.body;
-    data.push(new_data);
-    res.status(201).json(data);
-})
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
 
-function do_it(req, res) {
-    console.log("do_it");
-    res.send("Hello world!");
-}
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-app.get('/foo', do_it);
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})
-
-// var business = [
-//     {
-//         id: 1,
-//         name: "Criminal Coffee",
-//         street: "555 Coffee St.",
-//         city: "Bend",
-//         state: "Oregon",
-//         zip: "97701",
-//         phone: "555-555-5555",
-//         category: "restaurant",
-//         subcategory: "coffee",
-//         website: null,
-//         email: null,
-//     },
-// ];
-
-// function get_business(req, res) {
-//     console.log("get_business: ", business)
-//     res.send(business);
-// }
-
-// function set_business(req, res) {
-//     console.log("set_business: ", req.body)
-//     business = req.body;
-//     res.send(business);
-// }
-
-// function get_business_id(req, res) {
-//     console.log("get_business_id: ", req.params.businessID)
-//     res.send(business.id);
-// }
-
-// app.get('/business', get_business(req, res) {
-//     ...
-// });
-
-// app.use(express.json());
-
-// app.post('/business', (req, res) {
-//     ...
-// });
-
-// app.get('/business/:businessID', get_business_id(req, res, next) {
-//     ...
-// });
-
-// app.put('/business/:businessID', (req, res, next) {
-//     ...
-// });
-
-// app.delete('/business/:businessID', (req, res, next) {
-//     var businessID = parseInt(req.params.businessID);
-//     if (business[businessID]) {
-//         business[businessID] = null;
-//         res.status(204).end();
-//     } else {
-//         next();
-//     }
-// });
+module.exports = app;
