@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "f73758e7-7885-45b5-b5b9-41c71ed4dff9",
+		"name": "cs493-project1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27733462"
+	},
+	"item": [
+		{
+			"name": "GET /businesses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/businesses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"businesses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /businesses",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 0,\r\n    \"name\": \"Fake Cafe\",\r\n    \"address\": \"123 Coffee St.\",\r\n    \"city\": \"Bend\",\r\n    \"state\": \"OR\",\r\n    \"zip\": \"97702\",\r\n    \"phone\": \"541-555-1234\",\r\n    \"category\": \"Restaurant\",\r\n    \"subcatego\": \"Cafe\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/businesses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"businesses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /businesses/id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 0,\r\n    \"name\": \"Fake Venue\",\r\n    \"address\": \"123 Music St.\",\r\n    \"city\": \"Bend\",\r\n    \"state\": \"OR\",\r\n    \"zip\": \"97702\",\r\n    \"phone\": \"541-555-2345\",\r\n    \"category\": \"Venue\",\r\n    \"subcategories\": \"Music\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/businesses/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"businesses",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /business/id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/businesses/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"businesses",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /businesses/id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/businesses/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"businesses",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /reviews",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/reviews",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
